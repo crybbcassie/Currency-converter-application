@@ -12,7 +12,7 @@ function App() {
      },
      {
        key: "2",
-       label: `1$ currencies`,
+       label: `1$ exchange`,
        children: <UsdTab />,
      },
    ];

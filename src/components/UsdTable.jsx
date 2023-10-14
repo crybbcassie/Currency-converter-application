@@ -1,40 +1,35 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Table } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCurrencies } from "../redux/currencySlice";
 
-const columns = [
-  {
-    title: "Currency",
-    dataIndex: "currency",
-    key: "currency",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Cost",
-    dataIndex: "cost",
-    key: "cost",
-  },
-];
+export default function UsdTable() {
+    const dispatch = useDispatch();
+    const currencies = useSelector((state) => state.currencies.currencies);
+    
+    useEffect(() => {
+      dispatch(fetchCurrencies());
+    }, [dispatch]);  
 
-const data = [
-  {
-    key: "1",
-    name: "John Brown",
-    address: "New York No. 1 Lake Park",
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    address: "Sydney No. 1 Lake Park",
-  },
-];
+  const columns = [
+    {
+      title: "Currency",
+      dataIndex: "currency",
+      key: "currency",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Cost",
+      dataIndex: "cost",
+      key: "cost",
+    },
+  ];
 
-export default function UsdTable() {  
+  const data = currencies.map((item) => ({
+    key: item.id,
+    currency: item.name,
+    cost: item.cost,
+  }));
+
     return <Table columns={columns} dataSource={data} style={{ width: "500px" }} />
   };
-
-;
