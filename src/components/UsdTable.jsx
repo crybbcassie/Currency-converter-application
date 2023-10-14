@@ -3,15 +3,15 @@ import { Table } from "antd";
 
 const columns = [
   {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
+    title: "Currency",
+    dataIndex: "currency",
+    key: "currency",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
+    title: "Cost",
+    dataIndex: "cost",
+    key: "cost",
   },
 ];
 
