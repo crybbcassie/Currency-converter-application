@@ -17,11 +17,14 @@ export default function UsdTable() {
       dataIndex: "currency",
       key: "currency",
       render: (text) => <a>{text}</a>,
+      sorter: (a, b) => a.name.length - b.name.length,
+      sortDirections: ["descend"],
     },
     {
       title: "Cost",
       dataIndex: "cost",
       key: "cost",
+      sorter: (a, b) => a.age - b.age,
     },
   ];
 
@@ -31,5 +34,5 @@ export default function UsdTable() {
     cost: item.cost,
   }));
 
-    return <Table columns={columns} dataSource={data} style={{ width: "500px" }} />
+    return <Table columns={columns} dataSource={data} size="small" style={{ width: "500px", padding:"10px" }} />
   };

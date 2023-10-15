@@ -10,7 +10,7 @@ export default function UsdTab() {
         display: "flex",
         flexDirection: "column",
         marginTop: "-16px",
-        maxWidth: "500px",
+        width: "500px",
       }}
     >
       <UsdTable />

@@ -1,33 +1,51 @@
-import React from "react";
-import { InputNumber, Button } from "antd";
+import React, {useState} from "react";
+import { Button, Input, Select } from "antd";
+const {Option} = Select
 
-export default function AddConvertItem() {
+export default function AddConvertItem({ onRemove, data }) {
+  const [price, setPrice] = useState("");
+
+  const handleSelectChange = (value) => {
+    const selectedCurrency = data.find((item) => item.name === value);
+    setPrice(selectedCurrency.cost.toString());
+  };
+
+  const selectBefore = (
+    <Select
+      size='small'
+      defaultValue={null}
+      style={{
+        width: 80,
+      }}
+      onChange={handleSelectChange}
+    >
+      {data.map((item) => (
+        <Option value={item.name} key={item.name}>
+          {item.name}
+        </Option>
+      ))}
+    </Select>
+  );
+
   return (
     <div style={{ display: "flex", width: "400px" }}>
       <div>
-        <InputNumber
-          addonBefore={<div>USD</div>}
-          defaultValue={100}
+        <Input
+          addonBefore={selectBefore}
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
           size="large"
-          style={{ margin: "10px 15px", minWidth: "367px" }}
+          style={{ margin: "10px 15px", minWidth: "340px" }}
         />
-        <p
-          style={{
-            color: "#4e4e4e",
-            fontSize: "10px",
-            margin: "-8px 0 0 20px",
-          }}
-        >
-          US dollar
-        </p>
       </div>
       <Button
         shape="circle"
         size="small"
-        style={{  margin: "17px 0 0 0" }}
+        style={{ margin: "17px 20px" }}
+        onClick={onRemove}
       >
         ×
       </Button>
     </div>
   );
-};
+}

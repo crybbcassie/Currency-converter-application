@@ -1,19 +1,21 @@
 import React from "react";
 import { InputNumber } from "antd";
 
-export default function ConvertItem(){
+export default function ConvertItem({data}){
   return (
     <>
       <InputNumber
-        addonBefore={<div>USD</div>}
-        defaultValue={100}
+        addonBefore={<div>{data.name}</div>}
+        defaultValue={data.cost}
         size="large"
         style={{ margin: "10px 15px", width: "400px" }}
       />
       <p
         style={{ color: "#4e4e4e", fontSize: "10px", margin: "-8px 0 0 20px" }}
       >
-        US dollar
+        {data.name === 'USD'? `US dollar` :
+        data.name === "BYN" ? `Belarussian ruble`:
+        data.name === "EUR"? 'Euro' : `Russian ruble`}
       </p>
     </>
   );
