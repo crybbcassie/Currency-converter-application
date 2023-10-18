@@ -17,14 +17,14 @@ export default function UsdTable() {
       dataIndex: "currency",
       key: "currency",
       render: (text) => <a>{text}</a>,
-      sorter: (a, b) => a.name.length - b.name.length,
+      sorter: (a, b) => b.currency.localeCompare(a.currency),
       sortDirections: ["descend"],
     },
     {
       title: "Cost",
       dataIndex: "cost",
       key: "cost",
-      sorter: (a, b) => a.age - b.age,
+      sorter: (a, b) => a.cost - b.cost,
     },
   ];
 
