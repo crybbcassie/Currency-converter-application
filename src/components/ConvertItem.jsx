@@ -1,7 +1,7 @@
 import React from "react";
 import { InputNumber } from "antd";
 
-export default function ConvertItem({data}){
+const ConvertItem = ({data}) => {
   return (
     <>
       <InputNumber
@@ -21,3 +21,4 @@ export default function ConvertItem({data}){
   );
 };
 
+export default ConvertItem

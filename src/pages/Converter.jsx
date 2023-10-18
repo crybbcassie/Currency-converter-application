@@ -6,7 +6,7 @@ import AddBtn from "../components/UI/AddBtn";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrencies } from "../redux/currencySlice";
 
-export default function Converter(){
+const Converter = () => {
   const dispatch = useDispatch()
   const currencies = useSelector((state) => state.currencies.currencies);
   const [convertItems, setConvertItems] = useState([]);
@@ -26,7 +26,6 @@ export default function Converter(){
  const handleRemoveConvertItem = (id) => {
    setConvertItems(convertItems.filter((item) => item.id !== id));
  };
-
 
   return (
     <Card
@@ -52,3 +51,5 @@ export default function Converter(){
     </Card>
   );
 };
+
+export default Converter

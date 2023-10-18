@@ -33,14 +33,8 @@ const currencySlice = createSlice({
   },
   reducers: {
     addCurrency(state, action) {
-      // state.currencies.push({
-      //   search: action.payload.search,
-      //   result: action.payload.result,
-      //   sort: action.payload.sort,
-      // });
     },
     removeCurrency(state, action) {
-      // state.currencies = currencies.favs.filter((fav) => fav.search !== action.payload.search);
     },
   },
   extraReducers: {

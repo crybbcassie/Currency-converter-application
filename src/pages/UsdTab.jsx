@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "antd";
 import UsdTable from "../components/UsdTable";
 
-export default function UsdTab() {
+const UsdTab = () => {
   return (
     <Card
       bordered={false}
@@ -17,3 +17,5 @@ export default function UsdTab() {
     </Card>
   );
 };
+
+export default UsdTab

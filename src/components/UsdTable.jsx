@@ -3,7 +3,7 @@ import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrencies } from "../redux/currencySlice";
 
-export default function UsdTable() {
+const UsdTable = () => {
     const dispatch = useDispatch();
     const currencies = useSelector((state) => state.currencies.currencies);
     
@@ -36,3 +36,5 @@ export default function UsdTable() {
 
     return <Table columns={columns} dataSource={data} size="small" style={{ width: "500px", padding:"10px" }} />
   };
+
+  export default UsdTable

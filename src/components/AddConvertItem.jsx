@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { Button, Input, Select } from "antd";
 const {Option} = Select
 
-export default function AddConvertItem({ onRemove, data }) {
+const AddConvertItem = ({ onRemove, data }) => {
   const [price, setPrice] = useState("");
 
   const handleSelectChange = (value) => {
@@ -49,3 +49,5 @@ export default function AddConvertItem({ onRemove, data }) {
     </div>
   );
 }
+
+export default AddConvertItem
