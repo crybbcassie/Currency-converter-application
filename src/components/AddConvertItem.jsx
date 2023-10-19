@@ -46,6 +46,11 @@ const AddConvertItem = ({ onRemove, data }) => {
       >
         ×
       </Button>
+      <p
+        style={{ color: "#4e4e4e", fontSize: "10px", margin: "-8px 0 0 20px" }}
+      >
+        {data.name}
+      </p>
     </div>
   );
 }

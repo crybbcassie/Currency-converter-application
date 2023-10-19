@@ -1,15 +1,33 @@
 import React, {useEffect} from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-// import { fetchCurrencies } from "../redux/currencySlice";
+import { fetchConversionRates } from "../redux/currencySlice";
 
 const UsdTable = () => {
+
     const dispatch = useDispatch();
-    const currencies = useSelector((state) => state.currencies.currencies);
-    
-    // useEffect(() => {
-    //   dispatch(fetchCurrencies());
-    // }, [dispatch]);  
+    const currencies = useSelector(
+      (state) => state.currencies.currencies.rates
+    );
+
+    const convertedData = currencies
+      ? Object.entries(currencies).map(([key, value]) => ({
+          name: key.replace("USD", ""),
+          cost: value,
+        }))
+      : [];
+
+    const constCurrNoUsd = convertedData
+      ? convertedData.filter((curr) => {
+          return ["RUB", "BYN", "EUR"].includes(curr.name);
+        })
+      : [];
+
+    const constCurr = [{ name: "USD", cost: 1 }, ...convertedData];
+
+    useEffect(() => {
+      dispatch(fetchConversionRates());
+    }, [dispatch]);
 
   const columns = [
     {
@@ -28,7 +46,7 @@ const UsdTable = () => {
     },
   ];
 
-  const data = currencies.map((item) => ({
+  const data = constCurr.map((item) => ({
     key: item.id,
     currency: item.name,
     cost: item.cost,

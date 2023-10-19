@@ -11,22 +11,30 @@ const Converter = () => {
   const currencies = useSelector((state) => state.currencies.currencies.rates);
   const [convertItems, setConvertItems] = useState([]);
 
+  const convertedData = currencies
+    ? Object.entries(currencies).map(([key, value]) => ({
+        name: key.replace("USD", ""),
+        cost: value,
+      }))
+    : [];
+
+const constCurrNoUsd = convertedData ? convertedData.filter((curr) => {
+  return ["RUB", "BYN", "EUR"].includes(curr.name);
+}) : [];
+
+const constCurr = [{ name: "USD", cost: 1 }, ...constCurrNoUsd];
+
   useEffect(() => {
     dispatch(fetchConversionRates());
   }, [dispatch]);
- 
 
-//  const constCurr = currencies.filter((curr) => {
-//    return ["USD", "RYB", "BYN", "EUR"].includes(curr.name);
-//  });
+ const handleAddConvertItem = () => {
+   setConvertItems([...convertItems, { id: new Date().getTime() }]);
+ };
 
-//  const handleAddConvertItem = () => {
-//    setConvertItems([...convertItems, { id: new Date().getTime() }]);
-//  };
-
-//  const handleRemoveConvertItem = (id) => {
-//    setConvertItems(convertItems.filter((item) => item.id !== id));
-//  };
+ const handleRemoveConvertItem = (id) => {
+   setConvertItems(convertItems.filter((item) => item.id !== id));
+ };
 
   return (
     <Card
@@ -38,17 +46,17 @@ const Converter = () => {
         width: "500px",
       }}
     >
-      {/* {constCurr.map((item) => {
+      {currencies ? constCurr.map((item) => {
         return <ConvertItem data={item} />;
-      })}
+      }) : <p>loading data...</p>}
       {convertItems.map((item) => (
         <AddConvertItem
-          key={item.id}
+          key={item.name}
           data={currencies}
-          onRemove={() => handleRemoveConvertItem(item.id)}
+          onRemove={() => handleRemoveConvertItem(item.name)}
         />
       ))}
-      <AddBtn onAdd={handleAddConvertItem} /> */}
+      <AddBtn onAdd={handleAddConvertItem} />
     </Card>
   );
 };

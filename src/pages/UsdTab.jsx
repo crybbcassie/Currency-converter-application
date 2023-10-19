@@ -13,7 +13,7 @@ const UsdTab = () => {
         width: "500px",
       }}
     >
-      <UsdTable />
+      <UsdTable/>
     </Card>
   );
 };
