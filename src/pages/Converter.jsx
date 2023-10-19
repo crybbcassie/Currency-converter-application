@@ -22,7 +22,8 @@ const constCurrNoUsd = convertedData ? convertedData.filter((curr) => {
   return ["RUB", "BYN", "EUR"].includes(curr.name);
 }) : [];
 
-const constCurr = [{ name: "USD", cost: 1 }, ...constCurrNoUsd];
+const selectedCurr = [{ name: "USD", cost: 1 }, ...constCurrNoUsd];
+const allCurr = [{ name: "USD", cost: 1 }, ...convertedData];
 
   useEffect(() => {
     dispatch(fetchConversionRates());
@@ -46,14 +47,18 @@ const constCurr = [{ name: "USD", cost: 1 }, ...constCurrNoUsd];
         width: "500px",
       }}
     >
-      {currencies ? constCurr.map((item) => {
-        return <ConvertItem data={item} />;
-      }) : <p>loading data...</p>}
+      {currencies ? (
+        selectedCurr.map((item) => {
+          return <ConvertItem data={item} />;
+        })
+      ) : (
+        <p>loading data...</p>
+      )}
       {convertItems.map((item) => (
         <AddConvertItem
           key={item.name}
-          data={currencies}
-          onRemove={() => handleRemoveConvertItem(item.name)}
+          data={allCurr}
+          onRemove={() => handleRemoveConvertItem(item.id)}
         />
       ))}
       <AddBtn onAdd={handleAddConvertItem} />

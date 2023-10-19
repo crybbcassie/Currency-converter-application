@@ -17,12 +17,6 @@ const UsdTable = () => {
         }))
       : [];
 
-    const constCurrNoUsd = convertedData
-      ? convertedData.filter((curr) => {
-          return ["RUB", "BYN", "EUR"].includes(curr.name);
-        })
-      : [];
-
     const constCurr = [{ name: "USD", cost: 1 }, ...convertedData];
 
     useEffect(() => {
