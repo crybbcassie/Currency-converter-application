@@ -1,25 +1,18 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
-export const fetchCurrencies = createAsyncThunk(
-  "currencies/fetchcurrencies",
-  async function () {
-    const apiKey = process.env.REACT_APP_API_KEY;
-    const apiUrl = process.env.REACT_APP_FETCH_URL;
+export const fetchConversionRates = createAsyncThunk(
+  "currencies/fetchConversionRates",
+  async () => {
     try {
-      const response = await axios.get(
-        `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`
-      );
-      const result = Object.entries(response.data.conversion_rates).map(
-        ([name, cost], index) => ({
-          id: index + 1,
-          name,
-          cost,
-        })
-      );
-      return result;
-    } catch (e) {
-      return console.error(e.message);
+      const docRef = doc(db, "currency", "conversion_rates");
+      const docSnap = await getDoc(docRef);
+
+      return docSnap.data();
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   }
 );
@@ -32,24 +25,24 @@ const currencySlice = createSlice({
     error: null,
   },
   reducers: {
-    addCurrency(state, action) {
-    },
-    removeCurrency(state, action) {
-    },
+    addCurrency(state, action) {},
+    removeCurrency(state, action) {},
   },
-  extraReducers: {
-    [fetchCurrencies.pending]: (state) => {
-      state.status = "loading";
-      state.error = null;
-    },
-    [fetchCurrencies.fulfilled]: (state, action) => {
-      state.status = "resolved";
-      state.currencies = action.payload;
-    },
-    [fetchCurrencies.rejected]: (state, action) => {
-      state.status = "rejected";
-      state.error = action.payload;
-    }}
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchConversionRates.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(fetchConversionRates.fulfilled, (state, action) => {
+        state.status = "resolved";
+        state.currencies = action.payload;
+      })
+      .addCase(fetchConversionRates.rejected, (state, action) => {
+        state.status = "rejected";
+        state.error = action.error.message;
+      });
+  },
 });
 
 export const { addCurrency, removeCurrency } = currencySlice.actions;

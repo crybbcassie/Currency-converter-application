@@ -1,15 +1,15 @@
 import React, {useEffect} from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCurrencies } from "../redux/currencySlice";
+// import { fetchCurrencies } from "../redux/currencySlice";
 
 const UsdTable = () => {
     const dispatch = useDispatch();
     const currencies = useSelector((state) => state.currencies.currencies);
     
-    useEffect(() => {
-      dispatch(fetchCurrencies());
-    }, [dispatch]);  
+    // useEffect(() => {
+    //   dispatch(fetchCurrencies());
+    // }, [dispatch]);  
 
   const columns = [
     {
@@ -34,7 +34,12 @@ const UsdTable = () => {
     cost: item.cost,
   }));
 
-    return <Table columns={columns} dataSource={data} size="small" style={{ width: "500px", padding:"10px" }} />
+    return <Table 
+    columns={columns} 
+    dataSource={data} 
+    size="small" 
+    style={{ width: "500px", padding:"10px" }} 
+    />
   };
 
   export default UsdTable

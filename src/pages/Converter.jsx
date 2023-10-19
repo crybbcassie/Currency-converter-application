@@ -4,28 +4,29 @@ import ConvertItem from "../components/ConvertItem";
 import AddConvertItem from "../components/AddConvertItem";
 import AddBtn from "../components/UI/AddBtn";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCurrencies } from "../redux/currencySlice";
+import { fetchConversionRates } from "../redux/currencySlice";
 
-const Converter = () => {
-  const dispatch = useDispatch()
-  const currencies = useSelector((state) => state.currencies.currencies);
+const Converter = () => {  
+  const dispatch = useDispatch();
+  const currencies = useSelector((state) => state.currencies.currencies.rates);
   const [convertItems, setConvertItems] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchCurrencies());
-  }, [dispatch])
+    dispatch(fetchConversionRates());
+  }, [dispatch]);
+ 
 
- const constCurr = currencies.filter((curr) => {
-   return ["USD", "RYB", "BYN", "EUR"].includes(curr.name);
- });
+//  const constCurr = currencies.filter((curr) => {
+//    return ["USD", "RYB", "BYN", "EUR"].includes(curr.name);
+//  });
 
- const handleAddConvertItem = () => {
-   setConvertItems([...convertItems, { id: new Date().getTime() }]);
- };
+//  const handleAddConvertItem = () => {
+//    setConvertItems([...convertItems, { id: new Date().getTime() }]);
+//  };
 
- const handleRemoveConvertItem = (id) => {
-   setConvertItems(convertItems.filter((item) => item.id !== id));
- };
+//  const handleRemoveConvertItem = (id) => {
+//    setConvertItems(convertItems.filter((item) => item.id !== id));
+//  };
 
   return (
     <Card
@@ -37,7 +38,7 @@ const Converter = () => {
         width: "500px",
       }}
     >
-      {constCurr.map((item) => {
+      {/* {constCurr.map((item) => {
         return <ConvertItem data={item} />;
       })}
       {convertItems.map((item) => (
@@ -47,7 +48,7 @@ const Converter = () => {
           onRemove={() => handleRemoveConvertItem(item.id)}
         />
       ))}
-      <AddBtn onAdd={handleAddConvertItem} />
+      <AddBtn onAdd={handleAddConvertItem} /> */}
     </Card>
   );
 };
