@@ -5,6 +5,7 @@ import AddConvertItem from "../components/AddConvertItem";
 import AddBtn from "../components/UI/AddBtn";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchConversionRates } from "../redux/currencySlice";
+import {v4} from 'uuid'
 
 const Converter = () => {  
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const allCurr = [{ name: "USD", cost: 1 }, ...convertedData];
   }, [dispatch]);
 
  const handleAddConvertItem = () => {
-   setConvertItems([...convertItems, { id: new Date().getTime() }]);
+   setConvertItems([...convertItems, { id: v4() }]);
  };
 
  const handleRemoveConvertItem = (id) => {

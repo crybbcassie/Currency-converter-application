@@ -1,14 +1,14 @@
 import axios from "axios";
-
-export const fetchCurrenciesName = async() => {
-    try {
 const requestOptions = {
   method: "GET",
   redirect: "follow",
   headers: {
-    apiKey: "IcwmX4syP11HBuRrlfU4PPBH4lfytWeT",
+    apiKey: process.env.REACT_APP_APILAYER_KEY,
   },
 };
+
+export const fetchCurrenciesName = async() => {
+    try {
         const response = await axios.get(
           "https://api.apilayer.com/currency_data/list",
           requestOptions
@@ -18,6 +18,20 @@ const requestOptions = {
       return console.error(e.message);
     }
   }
+
+
+  // export const fetchConvertedCurrency = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `https://api.apilayer.com/currency_data/convert?to=${to}&from=${from}&amount=${amount}`,
+  //       requestOptions
+  //     );
+  //     console.log(response.data.result)
+  //     return response.data.result;
+  //   } catch (e) {
+  //     return console.error(e.message);
+  //   }
+  // };
 
 
   
