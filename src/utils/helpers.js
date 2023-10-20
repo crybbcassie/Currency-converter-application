@@ -20,18 +20,18 @@ export const fetchCurrenciesName = async() => {
   }
 
 
-  // export const fetchConvertedCurrency = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `https://api.apilayer.com/currency_data/convert?to=${to}&from=${from}&amount=${amount}`,
-  //       requestOptions
-  //     );
-  //     console.log(response.data.result)
-  //     return response.data.result;
-  //   } catch (e) {
-  //     return console.error(e.message);
-  //   }
-  // };
+  export const fetchConvertedCurrency = async (to, from, amount) => {
+    try {
+      const response = await axios.get(
+        `https://api.apilayer.com/currency_data/convert?to=${to}&from=${from}&amount=${amount}`,
+        requestOptions
+      );
+      console.log(response.data.result)
+      return response.data.result;
+    } catch (e) {
+      return console.error(e.message);
+    }
+  };
 
 
   

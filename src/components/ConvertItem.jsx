@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { InputNumber } from "antd";
+import { fetchCurrenciesName } from "../utils/helpers";
 
 const ConvertItem = ({data}) => {
+  const [currenciesNames, setCurrenciesNames] = useState([]);
+  const [selectedCurrency, setSelectedCurrency] = useState(data.name);
+
+    useEffect(() => {
+      const fetchCurrencies = async () => {
+        try {
+          const names = await fetchCurrenciesName();
+          setCurrenciesNames(names);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      fetchCurrencies();
+    }, []);
   return (
     <>
       <InputNumber
@@ -13,7 +29,7 @@ const ConvertItem = ({data}) => {
       <p
         style={{ color: "#4e4e4e", fontSize: "10px", margin: "-8px 0 0 20px" }}
       >
-        {data.name}
+        {currenciesNames[selectedCurrency]}
       </p>
     </>
   );
