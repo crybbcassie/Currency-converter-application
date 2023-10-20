@@ -2,6 +2,7 @@
   "name": "currency-converter",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://crybbcassie.github.io/Currency-converter-application/",
   "dependencies": {
     "@firebase/firestore": "^4.3.0",
     "@reduxjs/toolkit": "^1.9.7",
@@ -16,6 +17,7 @@
     "express": "^4.18.2",
     "firebase": "^10.5.0",
     "firebase-admin": "^11.11.0",
+    "gh-pages": "^6.0.0",
     "next": "^13.5.5",
     "nodemon": "^3.0.1",
     "react": "^18.2.0",
@@ -31,7 +33,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "next dev"
+    "dev": "next dev",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [

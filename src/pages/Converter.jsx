@@ -50,7 +50,11 @@ const allCurr = [{ name: "USD", cost: 1 }, ...convertedData];
     >
       {currencies ? (
         selectedCurr.map((item) => {
-          return <ConvertItem data={item} />;
+          return (
+            <ConvertItem
+              data={item}
+            />
+          );
         })
       ) : (
         <p>loading data...</p>
